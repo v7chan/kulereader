@@ -19,7 +19,10 @@ function listenForPageNavigation() {
   $('#pager-next').click(function(e) {
     e.preventDefault();
     var next = getPage() + 1;
-    window.location.href = next;
+    if (next == 19) 
+        window.location.href = "/testindex"
+    else 
+        window.location.href = next;
   });
 }
 
