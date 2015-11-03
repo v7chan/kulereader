@@ -1,5 +1,12 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+  div(class='jumbotron')
+    h1 KuleReader 0.1
+    p.
+      Thanks for participating in our experiment for KuleReader! Our goal is to improve the reading experience by using 
+      colors to help you remember characters: who they are and what they did. This should take approximately 30 minutes
+      with time for feedback at the end. The book you'll be reading today is the prologue to #[i A Clash of Kings] (Book 2)
+      of the #[strong A Song of Ice and Fire] series (better known as #[strong A Game of Thrones]). 
+    p
+      a(class='btn btn-success btn-lg' href='/page/1') Get Started!

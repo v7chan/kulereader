@@ -1,0 +1,15 @@
+extends layout
+
+block css
+  link(rel='stylesheet', href='/stylesheets/chapter.css')
+
+block content
+  div(class='jumbotron')
+    block page
+  nav
+    ul(class='pager')
+      li #[a(id='pager-previous' href='#') Previous]
+      li #[a(id='pager-next' href='#') Next]
+
+block javascript
+  script(src='/javascripts/chapter.js')
