@@ -20,7 +20,7 @@ function listenForPageNavigation() {
     e.preventDefault();
     var next = getPage() + 1;
     if (next == 19) 
-        window.location.href = "/testindex"
+        window.location.href = "/test"
     else 
         window.location.href = next;
   });
