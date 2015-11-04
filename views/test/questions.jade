@@ -3,7 +3,12 @@ extends ../layout
 block content
   div(class='jumbotron')
     h1 Quiz
-    p.
-      Question 1: What has Bran done when faced with difficulty of not being to communicate with his father about the situation he is in?
-    p Click Finish test to submit results.  
-    p #[a(class='btn btn-success btn-lg' href='/test/submit') Finish test!]
+    form(name='quiz-form' method="post" action="/save_questions").form-horizontal
+        .form-group
+            label Question 1: What is relationship of Patchface and Stannis?
+            input(type="text", name="q1", placeholder="type answer", required).form-control
+            br
+            label Question 2: What is relationship between Cressen and Pylos?
+            input(type="text", name="q2", placeholder="type answer" required).form-control
+        p
+        button(type="submit").btn.btn-default.btn-lg Submit answers
