@@ -14,9 +14,19 @@ router.get('/test/questions', function(req, res) {
   res.render('test/questions', { title: 'Retention Quiz' });
 });
 
+router.get('/test/thankyou', function(req,res){
+	res.render('test/thankyou', { title: 'Thank you !'});
+});
+
 
 router.get('/page/:number', function(req, res) {
   res.render('page/' + req.params.number, { title: 'KuleReader', pageNumber: req.params.number });
+});
+
+router.post('/save_questions', function (req, res) {
+    console.log(req.body.q1);
+    console.log(req.body.q2);
+    res.redirect('/test/thankyou');
 });
 
 module.exports = router;
