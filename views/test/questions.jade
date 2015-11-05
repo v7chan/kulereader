@@ -3,12 +3,11 @@ extends ../layout
 block content
   div(class='jumbotron')
     h1 Quiz
-    form(name='quiz-form' method="post" action="/save_questions").form-horizontal
-        .form-group
-            label Question 1: What is relationship of Patchface and Stannis?
-            input(type="text", name="q1", placeholder="type answer", required).form-control
-            br
-            label Question 2: What is relationship between Cressen and Pylos?
-            input(type="text", name="q2", placeholder="type answer" required).form-control
-        p
-        button(type="submit").btn.btn-default.btn-lg Submit answers
+    form(name='quiz-form' method="post" action="/save_questions")
+      div.form-group
+        label Question 1: What is relationship of Patchface and Stannis?
+        input(type="text", name="q1", class='form-control', placeholder="type answer", required)
+      div.form-group
+        label Question 2: What is relationship between Cressen and Pylos?
+        input(type="text", name="q2", class='form-control', placeholder="type answer" required)
+      button(type="submit").btn.btn-default.btn-lg Submit answers
