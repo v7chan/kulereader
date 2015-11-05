@@ -1,7 +1,28 @@
 $(function() {
+  colorize();
   checkNavButtons();
   listenForPageNavigation();
 });
+
+function colorize() {
+  var characters = ['ardrian', 'axell', 'cressen', 'davos', 'duram', 'guncer', 
+                    'melisandre', 'monford', 'patchface', 'pylos', 'salladhor', 
+                    'selyse', 'shireen', 'stannis'];
+
+  $.ajax({
+    dataType: 'json',
+    url: '../javascripts/color_scheme.json',
+    success: function(colors) {
+      for (var i = 0; i < colors.length; i++) {
+        $('.' + characters[i]).css('color', colors[i]);
+      };
+
+      for (var i = 0; i < colors.length; i++) {
+        $('.box.' + characters[i]).css('background', colors[i]);
+      };
+    }
+  });
+}
 
 function checkNavButtons() {
   if(getPage() == 1) {
