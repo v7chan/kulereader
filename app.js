@@ -5,6 +5,37 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var sassMiddleware = require('node-sass-middleware');
+var Sequelize = require('sequelize');
+
+var sequelize = new Sequelize('postgres://jlxasdpwwuvdmr:IyMLwN53OG-PVCnro54sqbprT4@ec2-107-21-222-62.compute-1.amazonaws.com:5432/dejcmvtdel9mms',
+    {
+        dialectOptions: {
+           ssl: true
+        }
+    });
+
+var User = sequelize.define('user', {
+    firstName : {
+        type : Sequelize.STRING
+    },
+    lastName : {
+        type: Sequelize.STRING
+    }, 
+    email : {
+        type: Sequelize.STRING
+    }
+  },
+  { 
+    freezeTableName : true
+  }
+);
+
+User.sync({force: true}).then(function(){
+    console.log('database synched');
+    User.create({firstName: 'Irfan', lastName: 'Mulic', email: 'imulic@gmail.com'});
+    User.create({firstName: 'Vincent', lastName: 'Chan', email: 'v7chan@gmail.com'});
+});
+
 
 var app = express();
 
