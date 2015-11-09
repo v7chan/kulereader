@@ -1,27 +1,94 @@
+var CHARACTERS = ['bran', 'desmond', 'ned', 'gared', 'harwin', 'hullen', 'jon', 'jory', 'robb', 'theon', 'tomard', 'mance', 'nan'];
+var COLOR_SCHEME = {};
+var PAGE_CHARACTERS = [];
+
 $(function() {
-  colorize();
+  mapColors();
+
   checkNavButtons();
   listenForPageNavigation();
 });
 
-function colorize() {
-  var characters = ['ardrian', 'axell', 'cressen', 'davos', 'duram', 'guncer', 
-                    'melisandre', 'monford', 'patchface', 'pylos', 'salladhor', 
-                    'selyse', 'shireen', 'stannis'];
-
+function mapColors() {
   $.ajax({
     dataType: 'json',
     url: '../javascripts/color_scheme.json',
     success: function(colors) {
-      for (var i = 0; i < colors.length; i++) {
-        $('.' + characters[i]).css('color', colors[i]);
-      };
+      for (var i = 0; i < CHARACTERS.length; i++) {
+        COLOR_SCHEME[CHARACTERS[i]] = colors[i];
+      }
 
-      for (var i = 0; i < colors.length; i++) {
-        $('.box.' + characters[i]).css('background', colors[i]);
-      };
+      findNames();
+      colorize(colors);
+      generateTimeline(colors);
     }
   });
+}
+
+function colorize(colors) {
+  for(var i = 0; i < PAGE_CHARACTERS.length; i++) {
+    $('.' + PAGE_CHARACTERS[i]).css('color', COLOR_SCHEME[PAGE_CHARACTERS[i]]);
+    // $('.' + CHARACTERS[i]).css('text-decoration', 'underline');
+  };
+}
+
+function findNames() {
+  var names = $('.name');
+  
+  if(names.length == 0) return;
+
+  PAGE_CHARACTERS.push(parseName(names[0]));
+  for(var i = 0; i < names.length; i++) {
+    if(PAGE_CHARACTERS.indexOf(parseName(names[i])) == -1) PAGE_CHARACTERS.push(parseName(names[i]));
+  }
+}
+
+function parseName(obj) {
+  return $(obj).attr('class').split(' ')[1];
+}
+
+function generateTimeline(colors) {
+  var appearanceCounts = []
+  var appearancePercentages = [];
+  var totalAppearances = 0;
+
+  for (var i = 0; i < PAGE_CHARACTERS.length; i++) {
+    appearanceCounts.push($('.' + PAGE_CHARACTERS[i]).length);
+  };
+
+  for (var i = 0; i < PAGE_CHARACTERS.length; i++) {
+    totalAppearances += appearanceCounts[i];
+  };
+
+  for (var i = 0; i < PAGE_CHARACTERS.length; i++) {
+    appearancePercentages.push(percentify(appearanceCounts[i]/totalAppearances));
+  };
+
+  var gradient = '-webkit-linear-gradient(left, ';
+  var currentPercentage = 0;
+
+  if(totalAppearances == 0) $('#timeline-container').hide();
+  else {
+    currentPercentage += appearancePercentages[0];
+
+    gradient += COLOR_SCHEME[PAGE_CHARACTERS[0]] + ' ' + currentPercentage + '%,';
+
+    for (var i = 1; i < (PAGE_CHARACTERS.length - 1); i++) {
+      gradient += COLOR_SCHEME[PAGE_CHARACTERS[i]] + ' ' + currentPercentage + '%,';
+      currentPercentage += appearancePercentages[i];
+      gradient += COLOR_SCHEME[PAGE_CHARACTERS[i]] + ' ' + currentPercentage + '%,';
+    };
+
+    gradient += COLOR_SCHEME[PAGE_CHARACTERS[PAGE_CHARACTERS.length - 1]] + ' ' + currentPercentage + '%,';
+    gradient += COLOR_SCHEME[PAGE_CHARACTERS[PAGE_CHARACTERS.length - 1]] + ' 100%)';
+  }
+
+  $('#timeline').css('padding', '10px');
+  $('#timeline').css('background', gradient);
+}
+
+function percentify(decimal) {
+  return (Math.floor(decimal * Math.pow(100,2)) / 100);
 }
 
 function checkNavButtons() {

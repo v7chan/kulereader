@@ -4,14 +4,16 @@ block css
   link(rel='stylesheet', href='/stylesheets/chapter.css')
 
 block content
-  div(class='jumbotron')
+  div(id='page-container' class='jumbotron')
     block page
+  div(id='timeline-container')
+    div(id='timeline')
   nav
     ul(class='pager')
       li #[a(id='pager-previous' href='#') Previous]
       li #[a(id='pager-next' href='#') Next]
   div
-    p(id='page-count' class='text-center') #[small Page #{pageNumber} of 18]
+    p(id='page-count' class='text-center') #[small Page #{pageNumber} of 10]
 
 block javascript
   script(src='/javascripts/chapter.js')
