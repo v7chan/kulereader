@@ -1,0 +1,28 @@
+extends layout
+
+block content
+  div(class='jumbotron')
+    h3 Little bit more information about you
+    form(name='start-form' method="post" action="/save_user")
+      div.form-group
+        label Your full name
+        input(type="text", name="name", class='form-control', placeholder="full name", required)
+      div.form-group
+        label Email address
+        input(type="text", name="email", class='form-control', placeholder="your email" required)
+        label How many books on average you read per month
+        select(name="avg_books", class='form-control')
+          -for(var i = 0;i<5;i++){
+          option(value="#{i}") #{i}
+          -}
+        label How are familiar with Game Of Thrones Thrilogy
+        select(name="familiarity", class="form-control")
+          opton(value="none") no familiarity 
+          option(value="tv") watched it on TV
+          option(value="book") read at least one book
+          option(value="both") read and watched 
+        label Is English your mother toungue
+        select(name="english", class="form-control")
+          option(value="1") Yes
+          option(value="0") No
+      button(type="submit").btn.btn-default.btn-lg.btn-success Submit answers and start reading

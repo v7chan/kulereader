@@ -1,0 +1,13 @@
+extends layout
+
+block content
+  div(class='jumbotron')
+    h1 Data dump
+      for user in users
+         br
+         h2= user.full_name
+         h2= user.email
+
+      for answer in answers 
+        br
+        h2= answer.email
