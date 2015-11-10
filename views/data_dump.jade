@@ -3,10 +3,20 @@ extends layout
 block content
   div(class='jumbotron')
     h1 Data dump
+    table.table
+      td Name
+      td Email
+      td Avg books
+      td Familiarity
+      td English native?
       for user in users
-         br
-         h2= user.full_name
-         h2= user.email
+        tr
+        td= user.full_name
+        td= user.email
+        td= user.avg_books
+        td= user.familiarity
+        td= user.english == 1 ? "Yes" : "No"
+
 
       for answer in answers 
         br
