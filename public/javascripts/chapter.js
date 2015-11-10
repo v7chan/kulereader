@@ -1,4 +1,4 @@
-var CHARACTERS = ['bran', 'desmond', 'ned', 'gared', 'harwin', 'hullen', 'jon', 'jory', 'robb', 'theon', 'tomard', 'mance', 'nan'];
+var CHARACTERS = ['bran', 'ned', 'harwin', 'hullen', 'jon', 'jory', 'robb', 'theon', 'catelyn', 'arryn', 'rob', 'mance', 'nan'];
 var COLOR_SCHEME = {};
 var PAGE_CHARACTERS = [];
 
