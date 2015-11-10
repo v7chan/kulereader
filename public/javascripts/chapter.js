@@ -107,7 +107,7 @@ function listenForPageNavigation() {
   $('#pager-next').click(function(e) {
     e.preventDefault();
     var next = getPage() + 1;
-    if (next == 19) 
+    if (next == 11) 
         window.location.href = "/test"
     else 
         window.location.href = next;
