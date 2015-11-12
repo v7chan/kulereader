@@ -93,10 +93,12 @@ Answer.belongsTo(User);
 
 // To add and drop tables call : 
 
-User.sync();
-Answer.sync();
+//User.sync();
+//Answer.sync();
 
-sequelize.sync({force:true}).then(function(){
+// {force:true} to recreate the database loosing all the data
+
+sequelize.sync().then(function(){
     console.log('DB synched');
 //    User.create({full_name : 'Irfan Mulic', email: 'imulic@gmail.com'});
 //    User.create({full_name: 'Vincent Chan', email: 'v7chan@gmail.com'});
