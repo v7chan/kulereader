@@ -22,6 +22,12 @@ var User = sequelize.define('user', {
     },
     english : {
         type : Sequelize.INTEGER
+    }, 
+    started_at : {
+        type : Sequelize.DATE, defaultValue : Sequelize.NOW
+    }, 
+    finished_at : {
+        type : Sequelize.DATE
     }
   },
   { 
@@ -69,6 +75,13 @@ var Answer = sequelize.define('answers', {
     },
     answer10: {
         type : Sequelize.STRING
+    },
+    userId : {
+        type : Sequelize.INTEGER,
+        references : {
+            model: User,
+            key: 'id'
+        }
     }
   },
   { 
@@ -76,12 +89,14 @@ var Answer = sequelize.define('answers', {
   }
 );
 
+Answer.belongsTo(User);
+
 // To add and drop tables call : 
 
-// User.sync();
-// Answer.sync();
+User.sync();
+Answer.sync();
 
-sequelize.sync().then(function(){
+sequelize.sync({force:true}).then(function(){
     console.log('DB synched');
 //    User.create({full_name : 'Irfan Mulic', email: 'imulic@gmail.com'});
 //    User.create({full_name: 'Vincent Chan', email: 'v7chan@gmail.com'});

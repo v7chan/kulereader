@@ -2,7 +2,7 @@ extends layout
 
 block content
   div(class='jumbotron')
-    h1 Data dump
+    h2 Participants
     table.table
       td Name
       td Email
@@ -17,7 +17,17 @@ block content
         td= user.familiarity
         td= user.english == 1 ? "Yes" : "No"
 
-
+    h2 Answers from participants
+    table.table
+      td Participant
+      td Email
+      td Answer 1
+      td Answer 2
       for answer in answers 
-        br
-        h2= answer.email
+        tr
+        td= answer.user.full_name
+        td= answer.user.email
+        td= answer.answer1
+        td= answer.answer2
+        
+

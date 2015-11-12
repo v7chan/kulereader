@@ -36,20 +36,45 @@ router.get('/test/thankyou', function(req,res){
 router.post('/save_questions', function (req, res) {
     console.log(req.body.q1);
     console.log(req.body.q2);
+
+    var userEmail = req.cookies.email;
+    console.log(userEmail);
+
+    var timeStartedStr = req.cookies.timestarted;
+    var timeStarted = new Date(timeStartedStr);
+    var now = new Date(); 
+    var timeTaken = timeStarted - now;
+
+    
+    db.User.findOne({where : {email: userEmail}}).then(function(r){
+      console.log(r);
+      
+      db.Answer.create({
+        email: userEmail, 
+        time_taken : timeTaken,
+        answer1: req.body.q1,
+        answer2: req.body.q2,
+        userId: r.id
+      });
+    });
+
     res.redirect('/test/thankyou');
 });
 
 router.get('/data_dump', function(req,res){
-  var u,a ; 
-
   db.User.findAll().then(function(users){
-    //console.log(users);
-    db.Answer.findAll().then(function(answers){
-      //console.log(answers);
+    db.Answer.findAll({
+       include: [
+       { 
+         model: db.User, 
+         as : 'user'
+       }
+  ],
+    }).then(function(answers){
       res.render('data_dump', {'users': users, 'answers': answers});
+      console.log(answers);
       });
   });
-  
 });
 
 router.post('/save_user',function(req,res){
