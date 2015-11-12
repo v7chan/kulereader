@@ -17,7 +17,7 @@ router.get('/user_info', function(req,res) {
 
   if(token) res.redirect('/page/1');
 
-	res.render('user_info', {title : ''});
+	res.render('user_info', {title : 'Participant Survey'});
 });
 
 /* Test Routes */

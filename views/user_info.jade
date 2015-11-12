@@ -2,27 +2,30 @@ extends layout
 
 block content
   div(class='jumbotron')
-    h3 Little bit more information about you
+    h3 Before we begin...
     form(name='start-form' method="post" action="/save_user")
       div.form-group
-        label Your full name
-        input(type="text", name="name", class='form-control', placeholder="full name", required)
+        label Full Name
+        input(type="text", name="name", class='form-control', placeholder="Enter your full name", required)
       div.form-group
-        label Email address
-        input(type="text", name="email", class='form-control', placeholder="your email" required)
-        label How many books on average you read per month
+        label Email Address
+        input(type="text", name="email", class='form-control', required)
+      div.form-group  
+        label How many books do you read per month, on average?
         select(name="avg_books", class='form-control')
-          -for(var i = 0;i<5;i++){
-          option(value="#{i}") #{i}
-          -}
-        label How are familiar with Game Of Thrones Thrilogy
+          - for(var i = 0;i<5;i++) {
+            option(value="#{i}") #{i}
+          - }
+      div.form-group  
+        label How familiar are you with A Game of Thrones (A Song of Ice and Fire)?
         select(name="familiarity", class="form-control")
-          opton(value="none") no familiarity 
-          option(value="tv") watched it on TV
-          option(value="book") read at least one book
-          option(value="both") read and watched 
-        label Are you English native speaker
+          option(value="none") No Familiarity 
+          option(value="tv") Watched it on TV
+          option(value="book") Read at least one book
+          option(value="both") Read and watched
+      div.form-group  
+        label Is English your first language?
         select(name="english", class="form-control")
           option(value="1") Yes
           option(value="0") No
-      button(type="submit").btn.btn-default.btn-lg.btn-success Submit answers and start reading
+      button(type="submit").btn.btn-default.btn-lg.btn-success Start Reading!
