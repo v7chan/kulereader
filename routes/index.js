@@ -9,11 +9,14 @@ router.get('/', function(req, res) {
 
 /* Chapter routes */
 router.get('/page/:number', function(req, res) {
-  console.log('Cookies : '+req.cookies);
   res.render('page/' + req.params.number, { title: 'KuleReader', pageNumber: req.params.number });
 });
 
-router.get('/user_info', function(req,res){
+router.get('/user_info', function(req,res) {
+  var token = req.cookies.token;
+
+  if(token) res.redirect('/page/1');
+
 	res.render('user_info', {title : ''});
 });
 
@@ -55,8 +58,12 @@ router.post('/save_user',function(req,res){
   console.log(req.body.avg_books);
   console.log(req.body.familiarity);
   console.log(req.body.english);
-	res.cookie('full_name' , {"name":req.body.name,"email":req.body.email,"timestarted" : new Date()});
-  
+
+  res.cookie('email', req.body.email);
+  res.cookie('full_name', req.body.name);
+  res.cookie('token', Math.random());
+  res.cookie('timestarted', new Date());
+
   db.User.create({
     full_name : req.body.name,
     email : req.body.email,
