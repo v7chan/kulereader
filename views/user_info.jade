@@ -13,19 +13,27 @@ block content
       div.form-group  
         label How many books do you read per month, on average?
         select(name="avg_books", class='form-control')
-          - for(var i = 0;i<5;i++) {
+          - for(var i = 0; i < 5; i++) {
             option(value="#{i}") #{i}
           - }
+          option(value="9") 5+
       div.form-group  
         label How familiar are you with A Game of Thrones (A Song of Ice and Fire)?
         select(name="familiarity", class="form-control")
-          option(value="none") No Familiarity 
-          option(value="tv") Watched it on TV
-          option(value="book") Read at least one book
-          option(value="both") Read and watched
+          option(value="none")  No Familiarity
+          option(value="heard") Heard of it
+          option(value="tv")    Watched it on TV
+          option(value="book")  Read at least one book
+          option(value="both")  Read and watched
       div.form-group  
         label Is English your first language?
         select(name="english", class="form-control")
           option(value="1") Yes
           option(value="0") No
+      - if(debug == 'imvc')
+        div.form-group  
+          label Which condition were you assigned?
+          select(name="debug", class="form-control")
+            option(value="no-color") No Color
+            option(value="color") Color
       button(type="submit").btn.btn-default.btn-lg.btn-success Start Reading!

@@ -12,12 +12,12 @@ router.get('/page/:number', function(req, res) {
   res.render('page/' + req.params.number, { title: 'KuleReader', pageNumber: req.params.number });
 });
 
-router.get('/user_info', function(req,res) {
+router.get('/user_info', function(req, res) {
   var token = req.cookies.token;
 
   if(token) res.redirect('/page/1');
 
-	res.render('user_info', {title : 'Participant Survey'});
+	res.render('user_info', { title: 'Participant Survey', debug: req.query.debug });
 });
 
 router.get('/clear_database',function(req,res){
@@ -97,10 +97,22 @@ router.get('/data_dump', function(req,res){
   });
 });
 
-router.post('/save_user',function(req,res){
+router.post('/save_user', function(req,res) {
+  var token;
+
+  if(req.body.debug) {
+    if(req.body.debug == 'no-color')
+      token = 0;
+    else
+      token = 1;
+  }
+  else {
+    token = Math.random();
+  }
+
+  res.cookie('token', token);
   res.cookie('email', req.body.email);
   res.cookie('full_name', req.body.name);
-  res.cookie('token', Math.random());
   res.cookie('timestarted', new Date());
   
   db.User.create({
