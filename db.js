@@ -76,6 +76,9 @@ var Answer = sequelize.define('answers', {
     answer10: {
         type : Sequelize.STRING
     },
+    answer11 : {
+        type : Sequelize.STRING
+    },
     userId : {
         type : Sequelize.INTEGER,
         references : {

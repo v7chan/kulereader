@@ -34,29 +34,36 @@ router.get('/test/thankyou', function(req,res){
 });
 
 router.post('/save_questions', function (req, res) {
-    console.log(req.body.q1);
-    console.log(req.body.q2);
-
+    
     var userEmail = req.cookies.email;
-    console.log(userEmail);
-
     var timeStartedStr = req.cookies.timestarted;
     var timeStarted = new Date(timeStartedStr);
     var now = new Date(); 
-    var timeTaken = timeStarted - now;
+    var timeTaken = now-timeStarted;
 
-    
     db.User.findOne({where : {email: userEmail}}).then(function(r){
-      console.log(r);
-      
       db.Answer.create({
         email: userEmail, 
-        time_taken : timeTaken,
-        answer1: req.body.q1,
-        answer2: req.body.q2,
-        userId: r.id
+        time_taken : timeTaken/60000, // minutes
+        answer1  : req.body.q1,
+        answer2  : req.body.q2,
+        answer3  : req.body.q3,
+        answer4  : req.body.q4,
+        answer5  : req.body.q5,
+        answer6  : req.body.q6,
+        answer7  : req.body.q7,
+        answer8  : req.body.q8,
+        answer9  : req.body.q9,
+        answer10 : req.body.q10,
+        answer11 : req.body.q11,
+        userId   : r.id
       });
     });
+
+    res.clearCookie('email');
+    res.clearCookie('token');
+    res.clearCookie('timestarted');
+    res.clearCookie('full_name');
 
     res.redirect('/test/thankyou');
 });
@@ -72,23 +79,16 @@ router.get('/data_dump', function(req,res){
   ],
     }).then(function(answers){
       res.render('data_dump', {'users': users, 'answers': answers});
-      console.log(answers);
       });
   });
 });
 
 router.post('/save_user',function(req,res){
-	console.log(req.body.name);
-	console.log(req.body.email);
-  console.log(req.body.avg_books);
-  console.log(req.body.familiarity);
-  console.log(req.body.english);
-
   res.cookie('email', req.body.email);
   res.cookie('full_name', req.body.name);
   res.cookie('token', Math.random());
   res.cookie('timestarted', new Date());
-
+  
   db.User.create({
     full_name : req.body.name,
     email : req.body.email,
@@ -96,7 +96,7 @@ router.post('/save_user',function(req,res){
     familiarity : req.body.familiarity,
     english : req.body.english
   });
-	
+
   res.redirect('/page/1');
 });
 
