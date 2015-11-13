@@ -20,6 +20,16 @@ router.get('/user_info', function(req,res) {
 	res.render('user_info', {title : 'Participant Survey'});
 });
 
+router.get('/clear_database',function(req,res){
+  db.sequelize.sync({force:true}).then(function(){
+    console.log('DB synched');
+
+    res.send('Database cleared');
+  //  clearCookies(res);
+
+  });
+});
+
 /* Test Routes */
 router.get('/test', function(req, res) {
   res.render('test/index', { title: 'Retention Quiz' });
@@ -32,6 +42,13 @@ router.get('/test/questions', function(req, res) {
 router.get('/test/thankyou', function(req,res){
 	res.render('test/thankyou', { title: 'Thank you!'});
 });
+
+function clearCookies(res){
+    res.clearCookie('email');
+    res.clearCookie('token');
+    res.clearCookie('timestarted');
+    res.clearCookie('full_name');
+};
 
 router.post('/save_questions', function (req, res) {
     
@@ -60,10 +77,7 @@ router.post('/save_questions', function (req, res) {
       });
     });
 
-    res.clearCookie('email');
-    res.clearCookie('token');
-    res.clearCookie('timestarted');
-    res.clearCookie('full_name');
+    clearCookies(res); 
 
     res.redirect('/test/thankyou');
 });
