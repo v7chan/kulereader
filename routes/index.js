@@ -114,4 +114,22 @@ router.post('/save_user',function(req,res){
   res.redirect('/page/1');
 });
 
+router.get('/test_assign', function(req, res) {
+  var condition_a = 0;
+  var condition_b = 0;
+  var iterations = 5000;
+
+  for(var i = 0; i < iterations; i++) {
+    if(Math.random() > 0.5)
+      condition_b++;
+    else
+      condition_a++;
+  }
+
+  res.render('test_assign', { 
+    a_result: [condition_a, condition_a/iterations*100], 
+    b_result: [condition_b, condition_b/iterations*100]
+  });
+});
+
 module.exports = router;
