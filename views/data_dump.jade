@@ -18,35 +18,54 @@ block content
         td= user.english == 1 ? "Yes" : "No"
 
     h2 Answers from participants
-    table.table
-      td Participant
-      td Email
-      td Answer 1
-      td Answer 2
-      td Answer 3
-      td Answer 4
-      td Answer 5
-      td Answer 6
-      td Answer 7
-      td Answer 8
-      td Answer 9
-      td Answer 10
-      td Answer 11
-      td Time Taken (min)
-      for answer in answers 
+    for answer in answers
+      h5 Participant: #{answer.user.full_name} [#{answer.user.email}]
+      h5 Time Taken: #{answer.time_taken}
+      table.table
+        td #[strong Question]
+        td #[strong Answer]
         tr
-        td= answer.user.full_name
-        td= answer.user.email
-        td= answer.answer1
-        td= answer.answer2
-        td= answer.answer3
-        td= answer.answer4
-        td= answer.answer5
-        td= answer.answer6
-        td= answer.answer7
-        td= answer.answer8
-        td= answer.answer9
-        td= answer.answer10
-        td= answer.answer11
-        td= answer.time_taken
-        
+          td Question 1
+          td= answer.answer1
+        tr
+          td Question 2
+          td= answer.answer2
+        tr
+          td Question 3
+          td= answer.answer3
+        tr
+          td Question 4
+          td= answer.answer4
+        tr
+          td Question 5
+          td= answer.answer5
+        tr
+          td Question 6
+          td= answer.answer6
+        tr
+          td Question 7
+          td= answer.answer7
+        tr
+          td Question 8
+          td= answer.answer8
+        tr
+          td Question 9
+          td= answer.answer9
+        tr
+          td Question 10
+          td= answer.answer10
+        tr
+          td Question 11
+          td= answer.answer11
+        tr
+          td Question 12
+          td= answer.answer12
+        tr
+          td Question 13
+          td= answer.answer13
+        tr
+          td Question 14
+          td= answer.answer14
+        tr
+          td Question 15
+          td= answer.answer15

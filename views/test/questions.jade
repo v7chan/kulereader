@@ -2,42 +2,35 @@ extends ../layout
 
 block content
   div(class='jumbotron')
-    h2 Quiz, try to answer best to your knowledge
+    h1 Quiz
+    h4.
+      Answer the following questions based #[span.red ONLY] on what you have read in the previous two chapters. Try your
+      best, move quickly and don't stress about getting it wrong!
     form(name='quiz-form' method="post" action="/save_questions")
-      div.form-group
-        label Question 1: Provide number of children of Lord Eddard Stark that are mentioned in the chapters you have read?
-        input(type="text", name="q1", class='form-control', placeholder="type answer", required)
-      div.form-group
-        label Question 2: What is relationship between Bran and Jon Snow ?
-        input(type="text", name="q2", class='form-control', placeholder="type answer" required)
-      div.form-group
-        label Question 3: What kind of animal was Bran riding to the place of beheading ?
-        input(type='text' name="q3" class='form-control', placeholder='type answer', required)
-      div.form-group
-        label Question 4: Who found the direwolfs first ?
-        input(type='text' name="q4" class='form-control', placeholder='type answer', required)
-      div.form-group
-        label Question 5: Did Robb wanted to kill the direwolf pup or was it Greyjoy ?
-        input(type='text' name="q5" class='form-control', placeholder='type answer', required)
-      div.form-group
-        label Question 6: What was the name of the bastard of Eddard Stark, was it Robb, Jon or Greyjoy ?
-        input(type='text' name="q6" class='form-control', placeholder='type answer', required)
-      div.form-group
-        label Question 7: Who got the white direwolf pup?
-        input(type='text' name="q7" class='form-control', placeholder='type answer', required)
-      div.form-group
-        label Question 8: What was the name of the bastard of Eddard Stark, was it Robb, Jon or Greyjoy ?
-        input(type='text' name="q8" class='form-control', placeholder='type answer', required)
-      div.form-group
-        label Question 9: Catlyn and Ned Stark were specially proud of one of their children can you name it?
-        input(type='text' name="q9" class='form-control', placeholder='type answer', required)
-      div.form-group
-        label Question 10: News that Jon Arryn passed away that shocked Ned. What was relationship between Jon Arryn and Ned Stark?
-        input(type='text' name="q10" class='form-control', placeholder='type answer', required)
-      div.form-group
-        label Question 11: Somebody important is coming to visit Ned Stark at the Winterfel, can you remember what is the name of that person ?
-        input(type='text' name="q11" class='form-control', placeholder='type answer', required)
+      - var questions = []
+      - questions.push("Who is Harwin?")
+      - questions.push("How many deserters were there from the Night's Watch this year, according to Eddard?")
+      - questions.push("What kind of animal was Bran riding, specifically?")
+      - questions.push("What is the relationship between Bran and Jon?")
+      - questions.push("Who said that there have been no direwolf sightings in two hundred years?")
+      - questions.push("How many children does Lord Eddard Stark have, in total?")
+      - questions.push("Who found the direwolves first?")
+      - questions.push("Who is Jory Cassel?")
+      - questions.push("Who thought the deserter died bravely?")
+      - questions.push("What is the queen's name?")
+      - questions.push("What did Eddard say about the dead direwolf?")
+      - questions.push("What does Eddard Stark call the tree at the center of the godswood?")
+      - questions.push("How does Eddard Stark know Robert Baratheon?")
+      - questions.push("Who received the albino direwolf pup?")
+      - questions.push("Which child were Caitlyn and Eddard proud of?")
+
+      - for(var i = 1; i < 16; i++) {
+        div.form-group
+          label Question #{i}: #{questions[i-1]}
+          input(type='text', name='q#{i}', class='form-control', placeholder='Answer', required)
+      - }
+      br
       div.form-group
         label Open Feedback: Questions, Comments, Concerns?
-        textarea(name='feedback' class='form-control' rows='4')
+        textarea(name='feedback' class='form-control' placeholder='Optional' rows='4')
       button(type="submit").btn.btn-success.btn-lg Submit!

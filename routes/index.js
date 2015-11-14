@@ -51,17 +51,16 @@ function clearCookies(res){
 };
 
 router.post('/save_questions', function (req, res) {
-    
     var userEmail = req.cookies.email;
     var timeStartedStr = req.cookies.timestarted;
     var timeStarted = new Date(timeStartedStr);
     var now = new Date(); 
-    var timeTaken = now-timeStarted;
+    var timeTaken = now - timeStarted;
 
     db.User.findOne({where : {email: userEmail}}).then(function(r){
       db.Answer.create({
         email: userEmail, 
-        time_taken : timeTaken/60000, // minutes
+        time_taken : timeTaken/1000, // seconds
         answer1  : req.body.q1,
         answer2  : req.body.q2,
         answer3  : req.body.q3,
@@ -73,6 +72,10 @@ router.post('/save_questions', function (req, res) {
         answer9  : req.body.q9,
         answer10 : req.body.q10,
         answer11 : req.body.q11,
+        answer12 : req.body.q12,
+        answer13 : req.body.q13,
+        answer14 : req.body.q14,
+        answer15 : req.body.q15,
         userId   : r.id
       });
     });

@@ -79,6 +79,18 @@ var Answer = sequelize.define('answers', {
     answer11 : {
         type : Sequelize.STRING
     },
+    answer12 : {
+        type : Sequelize.STRING
+    },
+    answer13 : {
+        type : Sequelize.STRING
+    },
+    answer14 : {
+        type : Sequelize.STRING
+    },
+    answer15 : {
+        type : Sequelize.STRING
+    },
     userId : {
         type : Sequelize.INTEGER,
         references : {
