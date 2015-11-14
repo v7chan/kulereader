@@ -22,7 +22,10 @@ var User = sequelize.define('user', {
     },
     english : {
         type : Sequelize.INTEGER
-    }, 
+    },
+    condition : {
+        type : Sequelize.STRING
+    },
     started_at : {
         type : Sequelize.DATE, defaultValue : Sequelize.NOW
     }, 
@@ -91,6 +94,15 @@ var Answer = sequelize.define('answers', {
     answer15 : {
         type : Sequelize.STRING
     },
+    feedback1 : {
+        type : Sequelize.STRING
+    },
+    feedback2 : {
+        type : Sequelize.STRING
+    },
+    feedback3 : {
+        type : Sequelize.STRING
+    },    
     userId : {
         type : Sequelize.INTEGER,
         references : {

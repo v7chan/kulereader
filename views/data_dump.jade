@@ -19,8 +19,9 @@ block content
 
     h2 Answers from participants
     for answer in answers
-      h5 Participant: #{answer.user.full_name} [#{answer.user.email}]
-      h5 Time Taken: #{answer.time_taken}
+      h4 Participant: #{answer.user.full_name} [#{answer.user.email}]
+      h4 Time Taken: #{answer.time_taken}
+      h4 Condition: #{answer.user.condition}
       table.table
         td #[strong Question]
         td #[strong Answer]
@@ -69,3 +70,12 @@ block content
         tr
           td Question 15
           td= answer.answer15
+        tr
+          td Feedback 1
+          td= answer.feedback1
+        tr
+          td Feedback 2
+          td= answer.feedback2
+        tr
+          td Feedback 3
+          td= answer.feedback3

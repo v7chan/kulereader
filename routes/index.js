@@ -36,7 +36,8 @@ router.get('/test', function(req, res) {
 });
 
 router.get('/test/questions', function(req, res) {
-  res.render('test/questions', { title: 'Retention Quiz' });
+  var token = req.cookies.token;
+  res.render('test/questions', { title: 'Retention Quiz', color: (token > 0.5) });
 });
 
 router.get('/test/thankyou', function(req,res){
@@ -76,6 +77,9 @@ router.post('/save_questions', function (req, res) {
         answer13 : req.body.q13,
         answer14 : req.body.q14,
         answer15 : req.body.q15,
+        feedback1 : req.body.f1,
+        feedback2 : req.body.f2,
+        feedback3 : req.body.f3,
         userId   : r.id
       });
     });
@@ -101,7 +105,7 @@ router.get('/data_dump', function(req,res){
 });
 
 router.post('/save_user', function(req,res) {
-  var token;
+  var token, assignment;
 
   if(req.body.debug) {
     if(req.body.debug == 'no-color')
@@ -113,6 +117,11 @@ router.post('/save_user', function(req,res) {
     token = Math.random();
   }
 
+  if(token > 0.5)
+    assignment = 'Color';
+  else
+    assignment = 'No Color';
+
   res.cookie('token', token);
   res.cookie('email', req.body.email);
   res.cookie('full_name', req.body.name);
@@ -123,7 +132,8 @@ router.post('/save_user', function(req,res) {
     email : req.body.email,
     avg_books : req.body.avg_books,
     familiarity : req.body.familiarity,
-    english : req.body.english
+    english : req.body.english,
+    condition : assignment
   });
 
   res.redirect('/tutorial');
