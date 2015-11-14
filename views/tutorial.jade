@@ -1,0 +1,40 @@
+extends layout
+
+block content
+  div(class='jumbotron')
+    h1 Tutorial
+    p.
+      The KuleReader interface should be very familiar to you. Essentially, the two chapters are presented to you one 
+      page at a time, with navigation at the very bottom of the webpage to let you go forward or backward through the 
+      readings. Once you reach the last page, you will be taken to a short questionnaire designed to test your retention
+      on what you've read.
+    - if(color)
+      p.
+        For this experiment, we will be utilizing color to "highlight" characters: both their names and what they say
+        throughout the chapter. See the following example:
+      div.well.
+        It was a beautiful and sunny day in San Diego. #[span(style='color: rgb(228, 26, 28);') Jane] was just taking a
+        walk out on the beach and said to #[span(style='color: rgb(31, 120, 180);') John], 
+        #[span(style='color: rgb(228, 26, 28);') "Isn't it beautiful out here?"]
+      p.
+        Here, Jane was colored #[span(style='color: rgb(228, 26, 28);') red] while John was colored
+        #[span(style='color: rgb(31, 120, 180);') light blue]. Notice that the dialogue was also colored 
+        #[span(style='color: rgb(228, 26, 28);') red], signifying that Jane was the one who asked the question.
+      p.
+        Near the bottom of each page, you will also see a colored horizontal bar denoting the order in which characters
+        appeared on the page and how frequently they appeared. Names of all the characters also show up above this bar,
+        like the following example:
+      img(src='/images/timeline.png' class='thumbnail' style='width: 100%;')
+      p.
+        Each of the timelines are #[i unique] to the page you are on and not cumulative with the chapter. Click below
+        to start reading and good luck!
+    - else
+      p.
+        Near the bottom of each page, you'll find a list of all the characters that appeared on that page, see the 
+        example below:
+      img(src='/images/name_list.png' class='thumbnail' style='width: 100%;')
+      p.
+        This list is #[i unique] to the page you are on and not cumulative with the chapter. Click below to start reading
+        and good luck!
+
+    a(class='btn btn-success btn-lg' href='/page/1') Start Reading!

@@ -16,7 +16,7 @@ router.get('/user_info', function(req, res) {
   var token = req.cookies.token;
 
   if(token) res.redirect('/page/1');
-
+  
 	res.render('user_info', { title: 'Participant Survey', debug: req.query.debug });
 });
 
@@ -123,7 +123,12 @@ router.post('/save_user', function(req,res) {
     english : req.body.english
   });
 
-  res.redirect('/page/1');
+  res.redirect('/tutorial');
+});
+
+router.get('/tutorial', function(req, res) {
+  var token = req.cookies.token;
+  res.render('tutorial', { title: 'Tutorial', color: (token > 0.5) });
 });
 
 router.get('/test_assign', function(req, res) {
