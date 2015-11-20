@@ -1,0 +1,40 @@
+extends layout
+
+block content
+  - if(success)
+    div(class='alert alert-success', role='alert') #[b Success!] This user was deleted.
+  - else
+    div(class='alert alert-danger', role='alert') #[b Oh Snap!] This user was NOT deleted, something happened.
+
+  div(style='margin-bottom:20px;')
+    a(href='/data_dump', class='btn btn-info') #[span.glyphicon.glyphicon-chevron-left] Back to Data
+  div(class='jumbotron')
+    h3 User
+    div
+      | #[b Name:] #{user.full_name} #[br]
+      | #[b Email:] #{user.email} #[br]
+      | #[b Average Books:] #{user.avg_books} #[br]
+      | #[b Familiarity:] #{user.familiarity} #[br]
+      | #[b Native Speaker:] #{user.english == 1 ? "Yes" : "No"} #[br]
+      | #[b Condition:] #{user.condition} #[br]
+
+    - if(answer)
+      h3 Answers
+      div #[b Question 1 ] #{answer.answer1}
+      div #[b Question 2 ] #{answer.answer2}
+      div #[b Question 3 ] #{answer.answer3}
+      div #[b Question 4 ] #{answer.answer4}
+      div #[b Question 5 ] #{answer.answer5}
+      div #[b Question 6 ] #{answer.answer6}
+      div #[b Question 7 ] #{answer.answer7}
+      div #[b Question 8 ] #{answer.answer8}
+      div #[b Question 9 ] #{answer.answer9}
+      div #[b Question 10] #{answer.answer10}
+      div #[b Question 11] #{answer.answer11}
+      div #[b Question 12] #{answer.answer12}
+      div #[b Question 13] #{answer.answer13}
+      div #[b Question 14] #{answer.answer14}
+      div #[b Question 15] #{answer.answer15}
+      div #[b Feedback 1 ] #{answer.feedback1}
+      div #[b Feedback 2 ] #{answer.feedback2}
+      div #[b Feedback 3 ] #{answer.feedback3}

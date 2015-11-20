@@ -89,19 +89,43 @@ router.post('/save_questions', function (req, res) {
     res.redirect('/test/thankyou');
 });
 
-router.get('/data_dump', function(req,res){
-  db.User.findAll().then(function(users){
+router.get('/data_dump', function(req,res) {
+  db.User.findAll().then(function(users) {
     db.Answer.findAll({
        include: [
-       { 
-         model: db.User, 
-         as : 'user'
-       }
-  ],
-    }).then(function(answers){
-      res.render('data_dump', {'users': users, 'answers': answers});
-      });
+         { 
+           model: db.User,
+           as : 'user'
+         }
+      ],
+    }).then(function(answers) {
+      var userAnswers = {};
+      for(var i = 0; i < answers.length; i++) {
+        userAnswers[answers[i].user.id] = answers[i];
+      }
+
+      res.render('data_dump', { 'users': users, 'answers': answers, 'userAnswers': userAnswers, title: 'Results' });
+    });
   });
+});
+
+router.get('/delete_user/:userId', function(req,res) {
+  db.User.findById(req.params.userId).then(function(user) {
+    db.Answer.findOne({ where: { userId: parseInt(req.params.userId) } }).then(function(answer) {
+      if(answer) {
+        if(answer.destroy() && user.destroy())
+          res.render('delete', { title: 'Delete User', 'user': user, 'answer': answer, 'success': true });  
+        else
+          res.render('delete', { title: 'Delete User', 'user': user, 'answer': answer, 'success': false });
+      }
+      else {
+        if(user.destroy())
+          res.render('delete', { title: 'Delete User', 'user': user, 'success': true });
+        else
+          res.render('delete', { title: 'Delete User', 'user': user, 'success': false });
+      }
+    });
+  }); 
 });
 
 router.post('/save_user', function(req,res) {

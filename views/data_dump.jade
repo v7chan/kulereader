@@ -6,21 +6,31 @@ block content
     table.table
       td Name
       td Email
+      td Delete
       td Avg books
       td Familiarity
       td English native?
+      td Condition
+      td Completed?
       for user in users
         tr
         td= user.full_name
         td= user.email
+        td 
+          a(href='/delete_user/' + user.id, class='btn btn-danger btn-sm', onclick="return confirm('Are you sure?');")
+            span.glyphicon.glyphicon-trash 
+            |  Delete
         td= user.avg_books
         td= user.familiarity
         td= user.english == 1 ? "Yes" : "No"
+        td= user.condition
+        td= userAnswers[user.id] == null ? 'No' : 'Yes'
+
 
     h2 Answers from participants
     for answer in answers
       h4 Participant: #{answer.user.full_name} [#{answer.user.email}]
-      h4 Time Taken: #{answer.time_taken}
+      h4 Time Taken: #{answer.time_taken} seconds [#{answer.time_taken/60} minutes]
       h4 Condition: #{answer.user.condition}
       table.table
         td #[strong Question]
