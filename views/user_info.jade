@@ -36,4 +36,19 @@ block content
           select(name="debug", class="form-control")
             option(value="no-color") No Color
             option(value="color") Color
-      button(type="submit").btn.btn-lg.btn-warning Continue
+      br
+      div.checkbox
+        label
+          input(type='checkbox', id='legal', required)
+          | I give consent to participate in this study and understand that it is completely voluntary and that I may 
+          | discontinue my participation at any time.
+      button(type="submit", id='submit-btn' disabled).btn.btn-lg.btn-warning Continue
+
+block javascript
+  script(type='text/javascript').
+    $('#legal').change(function() {
+      if(this.checked)
+        $('#submit-btn').prop('disabled', false);
+      else
+        $('#submit-btn').prop('disabled', true);
+    });
