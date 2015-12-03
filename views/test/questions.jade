@@ -27,17 +27,17 @@ block content
       - for(var i = 1; i < 16; i++) {
         div.form-group
           label Question #{i}: #{questions[i-1]}
-          input(type='text', name='q#{i}', class='form-control', placeholder='Answer', required)
+          input(type='text', name='q#{i}', class='form-control', maxlength='250', placeholder='Answer', required)
       - }
       br
       div.form-group
         label Was it difficult keeping tracking of all the names in the readings?
-        input(type='text', name='f1', class='form-control', placeholder='Answer', required)
+        input(type='text', name='f1', class='form-control', maxlength='250', placeholder='Answer', required)
       - if(color)
         div.form-group
           label What did you think of the use of color to highlight the characters?
-          textarea(name='f2' class='form-control' placeholder='Answer' rows='2', required)
+          textarea(name='f2', class='form-control', maxlength='250', placeholder='Answer', rows='2', required)
       div.form-group
         label #[i (Optional)] Open Feedback: Questions, Comments, Concerns?
-        textarea(name='f3' class='form-control' placeholder='Optional' rows='4')
+        textarea(name='f3', class='form-control', maxlength='250', placeholder='Optional', rows='2')
       button(type="submit").btn.btn-success.btn-lg Submit!
